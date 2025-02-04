@@ -1,6 +1,7 @@
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { CheckCircle } from "lucide-react"
+import ThemeSwitcher from "@/lib/ThemeSwitcher"
 
 export default function Header() {
   return (
@@ -23,6 +24,8 @@ export default function Header() {
               Log in
             </Button>
             <Button>Sign up free</Button>
+            <ThemeSwitcher/>
+
           </nav>
         </div>
       </div>

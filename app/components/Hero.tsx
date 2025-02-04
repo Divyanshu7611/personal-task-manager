@@ -3,6 +3,7 @@ import { ArrowRight } from "lucide-react"
 import Image from "next/image"
 
 export default function Hero() {
+  const imageUrl = "/static/hero.webp"
   return (
     <section className="w-full py-12 md:py-24 lg:py-32 xl:py-48 bg-gradient-to-b from-white to-gray-100 dark:from-gray-900 dark:to-gray-800">
       <div className="container px-4 md:px-6">
@@ -30,9 +31,9 @@ export default function Hero() {
           </div>
           <div className="flex items-center justify-center">
             <Image
-              src="/placeholder.svg?height=300&width=400"
-              width={400}
-              height={300}
+              src= {imageUrl ? imageUrl : "/placeholder.svg?height=300&width=400"}
+              width={600}
+              height={700}
               alt="TaskMaster App Screenshot"
               className="rounded-xl shadow-2xl"
             />
