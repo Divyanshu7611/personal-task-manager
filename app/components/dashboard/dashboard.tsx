@@ -5,6 +5,7 @@ import { TaskCalendar } from '@/app/components/dashboard/task-calendra'
 import { TaskList } from '@/app/components/dashboard/task-list'
 import { ProgressChart } from '@/app/components/dashboard/progress-chart'
 import { Task } from '@/types/task'
+import { useAuthStore } from '@/store/useAuthStore'
 
 const initialTasks: Task[] = [
   {
@@ -66,6 +67,9 @@ function Dashboard() {
   const handleDeleteTask = (id: string) => {
     setTasks(tasks.filter(task => task.id !== id))
   }
+
+  const {user,token} = useAuthStore()
+  console.log("user and token",user,token)  
 
   return (
     <div className="min-h-screen bg-background p-8">

@@ -9,6 +9,7 @@ import { Label } from '@/components/ui/label';
 import { set } from 'date-fns';
 import {toast} from "sonner"
 import { useSignup } from '@/hooks/auth';
+import { useSignin } from '@/hooks/auth';
 
 const AuthPage = () => {
   const [isLogin, setIsLogin] = useState(true);
@@ -18,18 +19,7 @@ const AuthPage = () => {
   const [name,setName] = useState('');
 
   // handle signin logic
-  const handleSignIn = async (e:React.FormEvent) => {
-    e.preventDefault();
-    setLoading(true);
-    const res = await signIn('credentials', {email,password,redirect:false})
-    setLoading(false);
-    if(res?.error){
-      alert(res.error);
-    }else{
-      alert('Sign in success');
-      window.location.href = '/';
-    } 
-  }
+  const {signinMutation,handleSignin} = useSignin()
   
   const {signupMutation,handleSignup} = useSignup()
   return (
@@ -81,7 +71,7 @@ const AuthPage = () => {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <form className="space-y-4" onSubmit={isLogin ? handleSignIn : (e) => handleSignup(e,name,email,password)}>
+            <form className="space-y-4" onSubmit={isLogin ? (e) => handleSignin(e,email,password) : (e) => handleSignup(e,name,email,password)}>
               {!isLogin && (
                 <div className="space-y-2">
                   <Label htmlFor="name">Name</Label>

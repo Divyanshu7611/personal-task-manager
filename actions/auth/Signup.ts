@@ -7,7 +7,6 @@ import { users } from "@/db/schemas";
 import { error } from "console";
 
 export async function registerUser(name: string, email: string, password: string) {
-    console.log("dya",name,email,password)
   try {
     // const existingUser = await db.select({ id: users.id,email:users.email }).from(users).where(eq(users.email, email)).limit(1);
     const existingUser = await db.select().from(users).where(eq(users.email, email)).limit(1);
