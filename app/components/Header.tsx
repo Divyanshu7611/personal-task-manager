@@ -20,10 +20,15 @@ export default function Header() {
         </div>
         <div className="flex flex-1 items-center justify-between space-x-2 md:justify-end">
           <nav className="flex items-center">
+            <Link href="/auth" prefetch={true}>
             <Button variant="ghost" className="mr-2">
               Log in
             </Button>
+            </Link>
+            <Link href="/auth" prefetch>
+            
             <Button>Sign up free</Button>
+            </Link>
             <ThemeSwitcher/>
 
           </nav>
