@@ -15,6 +15,13 @@
       "when": 1738663402616,
       "tag": "0001_typical_celestials",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1739049487639,
+      "tag": "0002_fantastic_callisto",
+      "breakpoints": true
     }
   ]
 }

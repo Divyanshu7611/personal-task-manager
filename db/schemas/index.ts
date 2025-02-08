@@ -1,4 +1,5 @@
-import { serial, text, varchar, integer, boolean, timestamp, pgTable } from "drizzle-orm/pg-core";
+import { relations } from "drizzle-orm";
+import { serial, text, varchar, integer, boolean, timestamp, pgTable, uuid } from "drizzle-orm/pg-core";
 
 
 // user table
@@ -20,13 +21,25 @@ export const categories = pgTable("categories",{
 })
 
 // projects table
-export const projects = pgTable("projects",{
-  id:serial("id").primaryKey(),
-  name:varchar("name",{length:255}).notNull(),
-  userId:integer("user_id").references(()=>users.id,{onDelete:"cascade"}),
-  categoryId: integer("category_id").references(()=>categories.id,{onDelete:"set null"}),
-  createdAt:timestamp("created_at").defaultNow()
-})
+export const projects = pgTable("projects", {
+  id: serial("id").primaryKey(),
+  name: varchar("name", { length: 255 }).notNull(),
+  ownerId: integer("owner_id").references(() => users.id, { onDelete: "cascade" }).notNull(), // Owner ID
+  categoryId: integer("category_id").references(() => categories.id, { onDelete: "set null" }),
+  code: uuid("code").defaultRandom().unique(), // Unique code for inviting members
+  createdAt: timestamp("created_at").defaultNow(),
+});
+
+
+export const projectMembers = pgTable("project_members", {
+  id: serial("id").primaryKey(),
+  projectId: integer("project_id").references(() => projects.id, { onDelete: "cascade" }).notNull(),
+  userId: integer("user_id").references(() => users.id, { onDelete: "cascade" }).notNull(),
+  role: varchar("role", { length: 20 }).default("member"), // "owner" or "member"
+  createdAt: timestamp("created_at").defaultNow(),
+});
+
+
 
 // tasks table
 export const tasks = pgTable("tasks",{
@@ -37,3 +50,6 @@ export const tasks = pgTable("tasks",{
     completed:boolean("completed").default(false),
     createdAt:timestamp("created_at").defaultNow(),
 })
+
+
+

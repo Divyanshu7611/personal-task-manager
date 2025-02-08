@@ -7,6 +7,6 @@ export default {
     out:"db/migration",
     dialect:"postgresql",
     dbCredentials:{
-        url: process.env.DATABASE_URL || "postgres://postgres:qwer1234@localhost:5432/mydatabase",
+        url: process.env.DATABASE_URL,
     }
 }
